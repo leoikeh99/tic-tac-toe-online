@@ -5,6 +5,10 @@ export const BoardCover = styled.div`
   grid-template-columns: 1fr 1fr 1fr;
   grid-gap: 20px;
   margin: 20px 0;
+
+  @media (max-width: 360px) {
+    grid-gap: 10px;
+  }
 `;
 
 export const Tile = styled.button`
@@ -59,6 +63,45 @@ export const Tile = styled.button`
       svg {
         stroke: #f2b137;
       }
+    }
+  }
+
+  @media (max-width: 491px) {
+    width: 100%;
+    position: relative;
+    height: 0;
+    padding-bottom: 100%;
+
+    span {
+      position: absolute;
+      top: 20%;
+    }
+  }
+
+  @media (max-width: 395px) {
+    span {
+      transform: scale(0.8);
+      top: 17%;
+    }
+  }
+
+  @media (max-width: 373px) {
+    span {
+      transform: scale(0.7);
+    }
+  }
+
+  @media (max-width: 333px) {
+    span {
+      top: 15%;
+      left: 15%;
+    }
+  }
+
+  @media (max-width: 290px) {
+    span {
+      top: 9%;
+      left: 9%;
     }
   }
 `;

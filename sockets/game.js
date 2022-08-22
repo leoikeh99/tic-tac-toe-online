@@ -94,3 +94,18 @@ export const rematch = (io, data) => {
     );
   }
 };
+
+export const quitGame = (io, socket, game) => {
+  if (!games.some((_game) => _game.gameId === game.gameId)) return;
+
+  games = games.map((_game) =>
+    _game.gameId === game.gameId ? { ..._game, ...game } : _game
+  );
+
+  socket.leave(game.gameId);
+
+  io.in(game.gameId).emit(
+    "gameUpdated",
+    games.find((_game) => _game.gameId === game.gameId)
+  );
+};

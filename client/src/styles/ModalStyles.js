@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const GameResultCover = styled.div`
+export const ModalCover = styled.div`
   position: fixed;
   height: 266px;
   width: 100%;
@@ -14,6 +14,11 @@ export const GameResultCover = styled.div`
   font-size: 16px;
   lertter-spacing: 1px;
   color: #a8bfc9;
+
+  @media (max-width: 518px) {
+    height: 228px;
+    padding: 35px 0;
+  }
 `;
 
 export const Heading = styled.h2`
@@ -28,6 +33,17 @@ export const Heading = styled.h2`
   margin: 16px 0 24px 0;
   color: ${({ winner }) =>
     winner === "X" ? "#31C3BD" : winner === "O" ? "#F2B137" : "#A8BFC9"};
+
+  @media (max-width: 518px) {
+    font-size: 24px;
+    gap: 0px;
+    margin: 3px 0 10px 0;
+
+    svg {
+      transform: scale(0.47);
+      margin-right: -5px;
+    }
+  }
 `;
 
 export const Buttons = styled.div`

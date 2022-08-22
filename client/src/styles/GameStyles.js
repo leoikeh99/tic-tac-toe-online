@@ -35,6 +35,17 @@ export const PlayerTurn = styled.span`
     margin-left: -23px;
     fill: #a8bfc9;
   }
+
+  @media (max-width: 375px) {
+    width: 96px;
+    height: 40px;
+    font-size: 14px;
+
+    svg {
+      transform: scale(0.26);
+      margin-right: -27px;
+    }
+  }
 `;
 
 export const Reload = styled.button`
@@ -48,6 +59,16 @@ export const Reload = styled.button`
   background: #a8bfc9;
   box-shadow: inset 0px -4px 0px #6b8997;
   cursor: pointer;
+  font-weight: 700;
+
+  @media (max-width: 375px) {
+    height: 40px;
+    width: 40px;
+
+    svg {
+      transform: scale(0.8);
+    }
+  }
 `;
 
 export const History = styled.div`
@@ -71,5 +92,15 @@ export const HistoryItem = styled.div`
   .value {
     font-weight: 700;
     font-size: 24px;
+
+    @media (max-width: 375px) {
+      font-size: 20px;
+    }
+  }
+
+  @media (max-width: 375px) {
+    padding: 12px 0;
+    font-size: 12px;
+    line-height: 20px;
   }
 `;

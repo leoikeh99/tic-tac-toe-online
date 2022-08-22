@@ -30,13 +30,21 @@ export const GameResult = ({
   };
 
   return (
-    <MS.GameResultCover>
+    <MS.ModalCover>
       {!tie && versus === "player" && (
         <p>{playingAs === winner ? "PLAYER 1 WINS!" : "PLAYER 2 WINS!"}</p>
       )}
       {!tie && versus === "cpu" && (
         <p>{playingAs === winner ? "YOU WON!" : "OH NO, YOU LOST…"}</p>
       )}
+      {!tie && versus === "friend" && !gameInfo.userQuit ? (
+        gameInfo.x === userId || gameInfo.o === userId ? (
+          <p>{playingAs === winner ? "YOU WON!" : "OH NO, YOU LOST…"}</p>
+        ) : null
+      ) : null}
+      {!tie && versus === "friend" && gameInfo.userQuit ? (
+        <p>{gameInfo.userQuit !== userId ? "OPPONENT QUIT" : "YOU QUIT"}</p>
+      ) : null}
       <MS.Heading winner={winner}>
         {!tie && winner === "X" ? (
           <X_ICON fill="#31C3BD" />
@@ -54,15 +62,17 @@ export const GameResult = ({
             NEXT ROUND
           </Button>
         ) : gameInfo.x === userId || gameInfo.o === userId ? (
-          <Button color="yellow" onClick={Rematch}>
-            {!gameInfo.rematch
-              ? "REMATCH"
-              : gameInfo.rematch !== userId
-              ? "ACCEPT REMATCH"
-              : "REMATCH SENT"}
-          </Button>
+          !gameInfo.userQuit && (
+            <Button color="yellow" onClick={Rematch}>
+              {!gameInfo.rematch
+                ? "REMATCH"
+                : gameInfo.rematch !== userId
+                ? "ACCEPT REMATCH"
+                : "REMATCH SENT"}
+            </Button>
+          )
         ) : null}
       </MS.Buttons>
-    </MS.GameResultCover>
+    </MS.ModalCover>
   );
 };

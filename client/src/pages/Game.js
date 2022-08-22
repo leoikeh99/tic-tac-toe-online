@@ -13,12 +13,15 @@ import {
   numberOfMoves,
 } from "../utils/helperFunctions";
 import { GameResult } from "../components/modals/GameResult";
-import { CopyLink } from "../components/CopyLink";
+import CopyLink from "../components/CopyLink";
+import { RestartGame } from "../components/modals/RestartGame";
+import { QuitGame } from "../components/modals/QuitGame";
 
 const Game = ({ socket }) => {
   const [params] = useSearchParams();
   const [gameInfo, setGameInfo] = useState(null);
   const [userId] = useState(getUser());
+  const [restart, setRestart] = useState(false);
 
   useEffect(() => {
     if (params.get("versus") !== "friend" && !params.get("gameId")) {
@@ -81,9 +84,13 @@ const Game = ({ socket }) => {
               )}
               TURN
             </GS.PlayerTurn>
-            <GS.Reload>
-              <RestartIcon />
-            </GS.Reload>
+            {gameInfo.versus !== "friend" ? (
+              <GS.Reload onClick={() => setRestart("restart")}>
+                <RestartIcon />
+              </GS.Reload>
+            ) : gameInfo.x === userId || gameInfo.o === userId ? (
+              <GS.Reload onClick={() => setRestart("quit")}>QUIT</GS.Reload>
+            ) : null}
           </GS.Top>
           {gameInfo.versus !== "friend" && !gameInfo.gameId && (
             <Board gameInfo={gameInfo} setGameInfo={setGameInfo} />
@@ -98,11 +105,30 @@ const Game = ({ socket }) => {
               socket={socket}
             />
           ) : (
-            <CopyLink />
+            gameInfo.versus === "friend" && <CopyLink gameInfo={gameInfo} />
           )}
           <GS.History>
             <GS.HistoryItem color="blue">
-              <p>X {gameInfo.playingAs === "X" ? "(YOU)" : "(CPU)"}</p>
+              <p>
+                X{" "}
+                {gameInfo.playingAs === "X" && gameInfo.versus === "cpu"
+                  ? "(YOU)"
+                  : gameInfo.playingAs === "O" && gameInfo.versus === "cpu"
+                  ? "(CPU)"
+                  : gameInfo.versus === "player" && gameInfo.playingAs === "X"
+                  ? "(P1)"
+                  : gameInfo.versus === "player"
+                  ? "(P2)"
+                  : gameInfo.playingAs === "X" &&
+                    gameInfo.versus === "friend" &&
+                    userId === gameInfo.x
+                  ? "(YOU)"
+                  : gameInfo.playingAs === "O" &&
+                    gameInfo.versus === "friend" &&
+                    userId === gameInfo.o
+                  ? "(FRIEND)"
+                  : "GUEST"}
+              </p>
               <p className="value">
                 {gameInfo.rounds.filter((round) => round === "X").length}
               </p>
@@ -114,7 +140,26 @@ const Game = ({ socket }) => {
               </p>
             </GS.HistoryItem>
             <GS.HistoryItem color="yellow">
-              <p>O {gameInfo.playingAs === "O" ? "(YOU)" : "(CPU)"}</p>
+              <p>
+                O{" "}
+                {gameInfo.playingAs === "O" && gameInfo.versus === "cpu"
+                  ? "(YOU)"
+                  : gameInfo.playingAs === "X" && gameInfo.versus === "cpu"
+                  ? "(CPU)"
+                  : gameInfo.versus === "player" && gameInfo.playingAs === "O"
+                  ? "(P1)"
+                  : gameInfo.versus === "player"
+                  ? "(P2)"
+                  : gameInfo.playingAs === "O" &&
+                    gameInfo.versus === "friend" &&
+                    userId === gameInfo.o
+                  ? "(YOU)"
+                  : gameInfo.playingAs === "X" &&
+                    gameInfo.versus === "friend" &&
+                    userId === gameInfo.x
+                  ? "(FRIEND)"
+                  : "(GUEST)"}
+              </p>
               <p className="value">
                 {gameInfo.rounds.filter((round) => round === "O").length}
               </p>
@@ -130,6 +175,27 @@ const Game = ({ socket }) => {
             setGameInfo={setGameInfo}
             socket={socket}
             userId={userId}
+          />
+        </>
+      )}
+      {restart === "restart" && (
+        <>
+          <W.Overlay />
+          <RestartGame
+            gameInfo={gameInfo}
+            setGameInfo={setGameInfo}
+            setRestart={setRestart}
+          />
+        </>
+      )}
+      {restart === "quit" && (
+        <>
+          <W.Overlay />
+          <QuitGame
+            setRestart={setRestart}
+            socket={socket}
+            userId={userId}
+            gameInfo={gameInfo}
           />
         </>
       )}

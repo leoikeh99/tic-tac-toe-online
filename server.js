@@ -4,6 +4,7 @@ import { Server } from "socket.io";
 import {
   createChallenge,
   joinGame,
+  quitGame,
   rematch,
   updateGame,
 } from "./sockets/game.js";
@@ -27,6 +28,7 @@ io.on("connection", (socket) => {
   socket.on("joinGame", (data) => joinGame(io, socket, data));
   socket.on("updateGame", (game) => updateGame(io, game));
   socket.on("rematch", (data) => rematch(io, data));
+  socket.on("quitGame", (game) => quitGame(io, socket, game));
 });
 
 const PORT = process.env.PORT || 5000;

@@ -4,6 +4,10 @@ import { Link } from "react-router-dom";
 export const Container = styled.div`
   width: 460px;
   margin: auto;
+
+  @media (max-width: 491px) {
+    width: 95%;
+  }
 `;
 
 export const ButtonLink = styled(Link)`
@@ -16,7 +20,7 @@ export const ButtonLink = styled(Link)`
   font-size: 20px;
   font-weight: 700;
   font-family: inherit;
-  padding: 17px 0 25px 0;
+  padding: 17px 15px 25px 15px;
   letter-spacing: 1.25px;
   cursor: pointer;
   transition: background-color 0.1s ease-in;
