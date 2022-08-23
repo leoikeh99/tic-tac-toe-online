@@ -39,7 +39,6 @@ const io = new Server(server, {
 });
 
 io.on("connection", (socket) => {
-  console.log(socket.id);
   socket.on("createChallenge", (gameData) => createChallenge(socket, gameData));
   socket.on("joinGame", (data) => joinGame(io, socket, data));
   socket.on("updateGame", (game) => updateGame(io, game));

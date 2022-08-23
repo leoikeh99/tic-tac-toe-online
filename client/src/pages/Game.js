@@ -61,7 +61,6 @@ const Game = ({ socket }) => {
   }, [gameInfo, socket]);
 
   socket.on("gameUpdated", (game) => {
-    console.log("update", game);
     setGameInfo({
       ...gameInfo,
       ...game,

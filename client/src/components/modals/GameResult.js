@@ -24,7 +24,6 @@ export const GameResult = ({
 
   const Rematch = () => {
     if (gameInfo.rematch !== userId) {
-      console.log("sent");
       socket.emit("rematch", { gameId: gameInfo.gameId, userId });
     }
   };
