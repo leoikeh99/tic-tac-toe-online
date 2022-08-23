@@ -8,14 +8,16 @@ import {
   rematch,
   updateGame,
 } from "./sockets/game.js";
+import dotenv from "dotenv";
 
 const app = express();
 app.use(express.json({ extended: true, limit: "50mb" }));
+dotenv.config();
 
 const httpServer = createServer();
 const io = new Server(httpServer, {
   cors: {
-    origin: "http://localhost:3000",
+    origin: process.env.CLIENT_URL,
     methods: ["GET", "POST"],
     allowedHeaders: ["my-custom-header"],
     credentials: true,

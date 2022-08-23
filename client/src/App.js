@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Game from "./pages/Game";
 import Menu from "./pages/Menu";
@@ -6,7 +6,7 @@ import GlobalStyles from "./styles/GlobalStyles";
 import { io } from "socket.io-client";
 import { onConnect } from "./utils/socketEvents";
 import { createUser } from "./utils/helperFunctions";
-const socket = io("http://localhost:5000/", {
+const socket = io(process.env.REACT_APP_SERVER_URL, {
   withCredentials: true,
   extraHeaders: {
     "my-custom-header": "abcd",

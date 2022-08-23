@@ -134,7 +134,7 @@ export const Board = ({ gameInfo, setGameInfo, userId, socket }) => {
         });
       }
     }
-  }, [gameInfo]);
+  }, [gameInfo, setGameInfo]);
 
   return (
     <BS.BoardCover>
