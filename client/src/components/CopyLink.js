@@ -4,9 +4,9 @@ import { getUser } from "../utils/helperFunctions";
 
 const CopyLink = ({ gameInfo }) => {
   const [link] = useState(
-    `http://localhost:3000/game?gameId=${gameInfo.gameId}&playingAs=${
-      gameInfo.x === getUser() ? "O" : "X"
-    }&versus=friend`
+    `${process.env.REACT_APP_SERVER_URL}/game?gameId=${
+      gameInfo.gameId
+    }&playingAs=${gameInfo.x === getUser() ? "O" : "X"}&versus=friend`
   );
   const [hasCopied, setHasCopied] = useState(false);
 
