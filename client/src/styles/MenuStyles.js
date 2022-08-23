@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const MenuCover = styled.div`
+export const MenuCover = styled.main`
   height: 100vh;
   display: flex;
   align-items: center;
