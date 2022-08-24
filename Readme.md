@@ -36,8 +36,8 @@ Users should be able to:
 
 ### Links
 
-- Solution URL: [https://salty-badlands-83501.herokuapp.com/](https://salty-badlands-83501.herokuapp.com/)
-- Live Site URL: [Add live site URL here](https://your-live-site-url.com)
+- Solution URL: [https://www.frontendmentor.io/solutions/tic-tac-toe-game-bGw27rUXHO)
+- Live Site URL: [https://salty-badlands-83501.herokuapp.com/](https://salty-badlands-83501.herokuapp.com/)
 
 ## My process
 
