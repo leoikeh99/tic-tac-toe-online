@@ -37,7 +37,7 @@ Users should be able to:
 ### Links
 
 - Solution URL: [https://www.frontendmentor.io/solutions/tic-tac-toe-game-bGw27rUXHO)
-- Live Site URL: [https://salty-badlands-83501.herokuapp.com/](https://salty-badlands-83501.herokuapp.com/)
+- Live Site URL: [https://tic-tac-toe-ma15.onrender.com/)
 
 ## My process
 
